@@ -1,0 +1,607 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --accent: #0ea5e9;
+  --accent-2: #6366f1;
+  --border: rgba(15, 23, 42, 0.08);
+  --shadow-soft: 0 24px 80px rgba(15, 23, 42, 0.08);
+  --glow-sky: rgba(14, 165, 233, 0.15);
+  --glow-indigo: rgba(99, 102, 241, 0.12);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+/* ─────────────── Base ─────────────── */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ─────────────── Animated gradient text ─────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #0ea5e9, #6366f1, #ec4899, #0ea5e9);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 6s ease infinite;
+}
+
+@keyframes gradient-shift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ─────────────── Shimmer / shine for buttons ─────────────── */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.25) 45%,
+      rgba(255, 255, 255, 0.25) 55%,
+      transparent 60%);
+  background-size: 200% 100%;
+  animation: shimmer-slide 3s ease-in-out infinite;
+}
+
+@keyframes shimmer-slide {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ─────────────── Floating ─────────────── */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 6s ease-in-out 2s infinite;
+}
+
+.animate-float-slow {
+  animation: float 8s ease-in-out 1s infinite;
+}
+
+/* ─────────────── Pulse glow ─────────────── */
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+/* ─────────────── Zen grid ─────────────── */
+.zen-grid {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.06) 1px,
+      transparent 1px);
+  background-size: 28px 28px;
+  background-position: 12px 12px;
+}
+
+/* ─────────────── Hairline ─────────────── */
+.hairline {
+  border-color: var(--border);
+}
+
+/* ─────────────── Card glow on hover ─────────────── */
+.card-glow {
+  transition: box-shadow 0.4s ease, transform 0.3s ease;
+}
+
+.card-glow:hover {
+  box-shadow: 0 20px 60px rgba(14, 165, 233, 0.1), 0 8px 24px rgba(15, 23, 42, 0.06);
+  transform: translateY(-4px);
+}
+
+/* ─────────────── Gradient border ─────────────── */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.3), rgba(99, 102, 241, 0.3), rgba(236, 72, 153, 0.2));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+/* ─────────────── Hover lift ─────────────── */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 32px 80px rgba(15, 23, 42, 0.12);
+}
+
+/* ─────────────── Glass card ─────────────── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* ─────────────── GPU performance hints ─────────────── */
+.card-glow,
+.hover-lift,
+.gradient-border {
+  will-change: transform;
+  contain: layout style;
+}
+
+/* ─────────────── Hero text responsive ─────────────── */
+.hero-title-responsive {
+  font-size: clamp(1.75rem, 5vw, 3.5rem);
+  line-height: 1.15;
+}
+
+/* ─────────────── Section padding responsive ─────────────── */
+.section-padding {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+/* ─────────────── Smooth image loading ─────────────── */
+img {
+  transition: opacity 0.3s ease;
+}
+
+/* ─────────────── Interactive focus states ─────────────── */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #0ea5e9;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* ─────────────── Scrollbar styling ─────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.15);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 23, 42, 0.3);
+}
+
+/* ─────────────── Responsive typography ─────────────── */
+@media (max-width: 639px) {
+  h1 {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+}
+
+/* ─────────────── Touch-friendly tap targets ─────────────── */
+@media (pointer: coarse) {
+
+  a,
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ─────────────── Prefer reduced motion ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .gradient-text {
+    animation: none;
+  }
+
+  .shimmer::after {
+    animation: none;
+  }
+
+  .animate-float,
+  .animate-float-delayed,
+  .animate-float-slow {
+    animation: none;
+  }
+
+  .card-glow {
+    transition: none;
+  }
+
+  .hover-lift {
+    transition: none;
+  }
+
+  .zen-enso-path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .zen-dot {
+    animation: none;
+  }
+
+  .zen-loading-text {
+    animation: none;
+    opacity: 1;
+  }
+
+  .zen-loading-line {
+    animation: none;
+  }
+}
+
+/* ─────────────── Zen Loading Screen ─────────────── */
+.zen-loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background: radial-gradient(ellipse at center, #f8fafc 0%, #ffffff 70%);
+}
+
+.zen-enso-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zen-enso {
+  width: 100%;
+  height: 100%;
+}
+
+.zen-enso-path {
+  animation: zen-draw 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes zen-draw {
+  0% {
+    stroke-dashoffset: 290;
+    opacity: 0.3;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  60% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  80% {
+    stroke-dashoffset: 0;
+    opacity: 0.6;
+  }
+
+  100% {
+    stroke-dashoffset: -290;
+    opacity: 0.3;
+  }
+}
+
+.zen-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+  animation: zen-breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes zen-breathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: scale(1.8);
+    opacity: 1;
+  }
+}
+
+.zen-loading-text {
+  animation: zen-text-in 1s ease-out 0.3s both;
+}
+
+.zen-loading-brand {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+@keyframes zen-text-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.zen-loading-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      #0ea5e9 30%,
+      #6366f1 50%,
+      #0ea5e9 70%,
+      transparent 100%);
+  background-size: 200% 100%;
+  animation: zen-scan 1.8s ease-in-out infinite;
+  opacity: 0.5;
+}
+
+@keyframes zen-scan {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ── ZenLoader Custom Animations ────────────────────────────────────────── */
+@keyframes zenBreatheGlow {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes zenPulseGlow {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.7;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes zenScanMove {
+  0% {
+    top: -2px;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes zenFloatY {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes zenRotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes zenLogoReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes zenLogoGlowPulse {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes zenFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zenMsgFade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-zen-breathe-glow {
+  animation: zenBreatheGlow 8s ease-in-out infinite;
+}
+
+.animate-zen-pulse-glow {
+  animation: zenPulseGlow 6s ease-in-out infinite;
+}
+
+.animate-zen-scan-move {
+  animation: zenScanMove 12s linear infinite;
+}
+
+.animate-zen-float-y {
+  animation: zenFloatY 7s ease-in-out infinite;
+}
+
+.animate-zen-rotate-slow {
+  animation: zenRotateSlow 18s linear infinite;
+}
+
+.animate-zen-rotate-slow-reverse {
+  animation: zenRotateSlow 30s linear infinite reverse;
+}
+
+.animate-zen-logo-reveal {
+  animation: zenLogoReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-zen-logo-glow-pulse {
+  animation: zenLogoGlowPulse 4s ease-in-out infinite;
+}
+
+.animate-zen-fade-up {
+  animation: zenFadeUp 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-zen-msg-fade {
+  animation: zenMsgFade 0.6s ease both;
+}
