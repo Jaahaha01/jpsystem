@@ -197,7 +197,6 @@ export const getBlogCategories = cache(async (): Promise<StrapiCategory[]> => {
 
 /** Fetch Homepage Content */
 export const getHomepageData = cache(async (locale?: string): Promise<HomepageData | null> => {
-  console.log("============== STRAPI FETCH CALLED for HOMEPAGE ==============");
   const localeQuery = locale ? `&locale=${locale}` : "";
   const url =
     `${STRAPI_URL}/api/homepage` +

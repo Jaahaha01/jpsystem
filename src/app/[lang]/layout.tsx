@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   description:
     "High-end corporate website for Japan System Thailand — IT systems, e-Tax, and DX marketing solutions.",
-  metadataBase: new URL("https://example.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://jpsystem-nine.vercel.app"),
   openGraph: {
     title: "Japan System Thailand",
     description:
