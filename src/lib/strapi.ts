@@ -93,7 +93,7 @@ export const getBlogPosts = cache(async (
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
-      next: { tags: ["blog"] },
+      cache: "force-cache", next: { tags: ["blog"] },
     });
 
     if (!res.ok) throw new Error(`Strapi ${res.status}: ${res.statusText}`);
@@ -140,7 +140,7 @@ export const getBlogPost = cache(async (slug: string): Promise<BlogPost | null> 
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
-      next: { tags: ["blog", slug] },
+      cache: "force-cache", next: { tags: ["blog", slug] },
     });
 
     if (!res.ok) throw new Error(`Strapi ${res.status}: ${res.statusText}`);
@@ -174,7 +174,7 @@ export const getBlogCategories = cache(async (): Promise<StrapiCategory[]> => {
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
-      next: { tags: ["category"] },
+      cache: "force-cache", next: { tags: ["category"] },
     });
 
     if (!res.ok) return [];
@@ -207,7 +207,7 @@ export const getHomepageData = cache(async (locale?: string): Promise<HomepageDa
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
-      next: { tags: ["homepage", locale || "th"] },
+      cache: "force-cache", next: { tags: ["homepage", locale || "th"] },
     });
 
     if (!res.ok) return null;
@@ -258,7 +258,7 @@ export const getNewReleaseData = cache(async (locale?: string): Promise<NewRelea
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
-      next: { tags: ["new-release", locale || "th"] },
+      cache: "force-cache", next: { tags: ["new-release", locale || "th"] },
     });
 
     if (!res.ok) return null;
@@ -306,7 +306,7 @@ export const getCompanyData = cache(async (locale?: string): Promise<CompanyData
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
-      next: { tags: ["company", locale || "th"] }, // company info rarely changes
+      cache: "force-cache", next: { tags: ["company", locale || "th"] }, // company info rarely changes
     });
 
     if (!res.ok) return null;
@@ -356,7 +356,7 @@ export const getContactData = cache(async (locale?: string): Promise<ContactData
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
-      next: { tags: ["contact", locale || "th"] }, // contact info rarely changes
+      cache: "force-cache", next: { tags: ["contact", locale || "th"] }, // contact info rarely changes
     });
 
     if (!res.ok) return null;
@@ -408,7 +408,7 @@ export const getItSystemData = cache(async (locale?: string): Promise<ItSystemDa
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
-      next: { tags: ["it-system", locale || "th"] },
+      cache: "force-cache", next: { tags: ["it-system", locale || "th"] },
     });
 
     if (!res.ok) return null;
@@ -465,7 +465,7 @@ export const getETaxData = cache(async (locale?: string): Promise<ETaxData | nul
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
-      next: { tags: ["e-tax", locale || "th"] },
+      cache: "force-cache", next: { tags: ["e-tax", locale || "th"] },
     });
 
     if (!res.ok) return null;
@@ -542,7 +542,7 @@ export const getMarketingData = cache(async (locale?: string): Promise<Marketing
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
-      next: { tags: ["marketing", locale || "th"] },
+      cache: "force-cache", next: { tags: ["marketing", locale || "th"] },
     });
 
     if (!res.ok) return null;
@@ -591,7 +591,7 @@ export const getMyLogStarData = cache(async (locale?: string): Promise<MyLogStar
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
-      next: { tags: ["my-log-star", locale || "th"] },
+      cache: "force-cache", next: { tags: ["my-log-star", locale || "th"] },
     });
 
     if (!res.ok) return null;
