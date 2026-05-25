@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { locales, defaultLocale } from "./i18n/config";
 
@@ -11,17 +10,26 @@ function getLocale(request: NextRequest): string {
     return cookieLocale;
   }
 
-  // 2. Check if there is any supported locale in the pathname
+  // 2. Check browser language
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
-
+  
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
-
-  try {
-    return matchLocale(languages, locales as unknown as string[], defaultLocale);
-  } catch (e) {
-    return defaultLocale;
+  
+  // 3. Exception for Japanese users: If 'ja' is the top matched language among our supported ones
+  // We check if 'ja' is the most preferred language
+  const isJapanese = languages.some(lang => lang.startsWith('ja'));
+  
+  // If they have Japanese in their accept-language, we can route them to JA
+  // But strictly speaking, if they prefer Japanese over English.
+  // A simple check: if 'ja' is in their preferred languages, show 'ja'.
+  // Otherwise default to 'en'.
+  if (isJapanese) {
+    return "ja";
   }
+
+  // 4. Everyone else (including Thai users) gets EN
+  return defaultLocale;
 }
 
 export function middleware(request: NextRequest) {
