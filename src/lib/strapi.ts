@@ -1,7 +1,7 @@
 /**
  * Strapi CMS API client
  * Fetches blog posts from Strapi v4/v5 REST API
- * Deployed Strapi URL: https://committed-activity-2b489cb880.strapiapp.com/
+ * Deployed Strapi URL: https://methodical-friendship-4f4bd4b901.strapiapp.com/
  *
  * Set STRAPI_URL in .env.local or your hosting environment to override.
  * NOTE: Use STRAPI_URL (not NEXT_PUBLIC_STRAPI_URL) for server-side only fetching
@@ -11,7 +11,7 @@
 import { cache } from "react";
 
 const STRAPI_URL =
-  process.env.STRAPI_URL || "https://committed-activity-2b489cb880.strapiapp.com";
+  process.env.STRAPI_URL || "https://methodical-friendship-4f4bd4b901.strapiapp.com";
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN || "";
 
 import type { StrapiImage, StrapiImageFormat, StrapiCategory, BlogPost, HomepageData, NewsCard, NewReleaseData, CompanyData, ContactData, ItServiceItem, ItFeatureItem, ItSystemData, ETaxPainItem, ETaxBenefitItem, ETaxCostItem, ETaxData, MarketingSocialIcon, MarketingData, MyLogStarAccordionItem, MyLogStarData } from '@/types/strapi';
@@ -93,6 +93,7 @@ export const getBlogPosts = cache(async (
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
+      cache: "force-cache",
       next: { revalidate: 2592000, tags: ["blog"] },
     });
 
@@ -140,6 +141,7 @@ export const getBlogPost = cache(async (slug: string): Promise<BlogPost | null> 
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
+      cache: "force-cache",
       next: { revalidate: 2592000, tags: ["blog", slug] },
     });
 
@@ -174,6 +176,7 @@ export const getBlogCategories = cache(async (): Promise<StrapiCategory[]> => {
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
+      cache: "force-cache",
       next: { revalidate: 2592000, tags: ["category"] },
     });
 
@@ -194,6 +197,7 @@ export const getBlogCategories = cache(async (): Promise<StrapiCategory[]> => {
 
 /** Fetch Homepage Content */
 export const getHomepageData = cache(async (locale?: string): Promise<HomepageData | null> => {
+  console.log("============== STRAPI FETCH CALLED for HOMEPAGE ==============");
   const localeQuery = locale ? `&locale=${locale}` : "";
   const url =
     `${STRAPI_URL}/api/homepage` +
@@ -207,6 +211,7 @@ export const getHomepageData = cache(async (locale?: string): Promise<HomepageDa
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
+      cache: "force-cache",
       next: { revalidate: 2592000, tags: ["homepage", locale || "th"] },
     });
 
@@ -258,6 +263,7 @@ export const getNewReleaseData = cache(async (locale?: string): Promise<NewRelea
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
+      cache: "force-cache",
       next: { revalidate: 2592000, tags: ["new-release", locale || "th"] },
     });
 
@@ -306,6 +312,7 @@ export const getCompanyData = cache(async (locale?: string): Promise<CompanyData
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
+      cache: "force-cache",
       next: { revalidate: 2592000, tags: ["company", locale || "th"] }, // company info rarely changes
     });
 
@@ -356,6 +363,7 @@ export const getContactData = cache(async (locale?: string): Promise<ContactData
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
+      cache: "force-cache",
       next: { revalidate: 2592000, tags: ["contact", locale || "th"] }, // contact info rarely changes
     });
 
@@ -408,6 +416,7 @@ export const getItSystemData = cache(async (locale?: string): Promise<ItSystemDa
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
+      cache: "force-cache",
       next: { revalidate: 2592000, tags: ["it-system", locale || "th"] },
     });
 
@@ -465,6 +474,7 @@ export const getETaxData = cache(async (locale?: string): Promise<ETaxData | nul
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
+      cache: "force-cache",
       next: { revalidate: 2592000, tags: ["e-tax", locale || "th"] },
     });
 
@@ -542,6 +552,7 @@ export const getMarketingData = cache(async (locale?: string): Promise<Marketing
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
+      cache: "force-cache",
       next: { revalidate: 2592000, tags: ["marketing", locale || "th"] },
     });
 
@@ -591,6 +602,7 @@ export const getMyLogStarData = cache(async (locale?: string): Promise<MyLogStar
   try {
     const res = await fetch(url, {
       headers: buildHeaders(false), // public endpoint
+      cache: "force-cache",
       next: { revalidate: 2592000, tags: ["my-log-star", locale || "th"] },
     });
 

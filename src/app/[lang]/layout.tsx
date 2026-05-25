@@ -4,7 +4,6 @@ import "@/app/globals.css";
 import { ShellWrapper } from "@/components/ShellWrapper";
 import { getDictionary } from "@/i18n/dictionaries";
 import { hasLocale, defaultLocale, locales, htmlLangMap } from "@/i18n/config";
-import { cookies } from "next/headers";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -48,10 +47,9 @@ export default async function RootLayout(props: {
   const locale = hasLocale(lang) ? lang : defaultLocale;
   const dict = await getDictionary(locale);
 
-  // Check cookie server-side to avoid flash of loading screen
-  const cookieStore = await cookies();
-  const zenLoaded = cookieStore.get("jpsys_zen_loaded");
-  const initialShowLoader = !zenLoaded;
+  // Remove server-side cookies check to allow Next.js to statically generate the entire site.
+  // The client component (ShellWrapper) will check the cookie in a useEffect.
+  const initialShowLoader = true;
 
   return (
     <html

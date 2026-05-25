@@ -17,10 +17,10 @@ export default function ITSystemClient({ data, dict }: { data: ItSystemData | nu
     const p = dict.pages.itSystem;
 
   const defaultServiceImages = [
-    "/Maintainance.png",
-    "/Website & Online marketing.png",
-    "/IT Support & Help Desk.png",
-    "/Product management system.png",
+    "/maintenance.png",
+    "/website-online-marketing.png",
+    "/it-support-help-desk.png",
+    "/product-management-system.png",
   ];
 
   // Fallbacks
@@ -39,7 +39,7 @@ export default function ITSystemClient({ data, dict }: { data: ItSystemData | nu
     
     const imageUrl = (strapiItem && strapiItem.image)
       ? getStrapiImageUrl(strapiItem.image)
-      : (defaultServiceImages[idx] || "/Maintainance.png");
+      : (defaultServiceImages[idx] || "/maintenance.png");
 
     return { title, imageUrl };
   });
@@ -51,7 +51,7 @@ export default function ITSystemClient({ data, dict }: { data: ItSystemData | nu
       if (strapiItem && strapiItem.title && strapiItem.title.trim() !== "") {
         serviceItems.push({
           title: strapiItem.title,
-          imageUrl: strapiItem.image ? getStrapiImageUrl(strapiItem.image) : "/Maintainance.png"
+          imageUrl: strapiItem.image ? getStrapiImageUrl(strapiItem.image) : "/maintenance.png"
         });
       }
     }

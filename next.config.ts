@@ -62,6 +62,10 @@ const nextConfig: NextConfig = {
   experimental: {
     // Enable optimized CSS loading
     optimizeCss: true,
+    staleTimes: {
+      dynamic: 60, // Cache dynamic routes in client for 60 seconds
+      static: 180,
+    },
   },
 };
 

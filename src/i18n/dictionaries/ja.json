@@ -25,7 +25,7 @@
   },
   "pages": {
     "home": {
-      "metaTitle": "モダン禅 IT パートナー",
+      "metaTitle": "",
       "hero": {
         "title": "Japan System では貴社の DX（デジタルトランスフォーメーション）をお手伝いいたします。",
         "subtitle": "ミニマルで精緻。システム開発、e-Tax、DX/ITマーケティングを一貫して提供します。",
@@ -34,11 +34,26 @@
       "services": {
         "title": "サービス",
         "items": [
-          { "title": "ITシステム開発", "desc": "設計から品質を担保し、拡張性と保守性を重視した実装を行います。" },
-          { "title": "e-Tax Invoice & e-Receipt", "desc": "業務を電子化し、コスト削減とスピード向上を実現します。" },
-          { "title": "DX / ITマーケティング", "desc": "分析から運用まで—戦略と実行をテクノロジーでつなぎます。" },
-          { "title": "セキュリティ / ログ", "desc": "監査ログと可観測性の整備で、ガバナンスと運用を強化します。" },
-          { "title": "コンサルティング", "desc": "経営層にも伝わるロードマップで意思決定を支援します。" }
+          {
+            "title": "ITシステム開発",
+            "desc": "設計から品質を担保し、拡張性と保守性を重視した実装を行います。"
+          },
+          {
+            "title": "e-Tax Invoice & e-Receipt",
+            "desc": "業務を電子化し、コスト削減とスピード向上を実現します。"
+          },
+          {
+            "title": "DX / ITマーケティング",
+            "desc": "分析から運用まで—戦略と実行をテクノロジーでつなぎます。"
+          },
+          {
+            "title": "セキュリティ / ログ",
+            "desc": "監査ログと可観測性の整備で、ガバナンスと運用を強化します。"
+          },
+          {
+            "title": "コンサルティング",
+            "desc": "経営層にも伝わるロードマップで意思決定を支援します。"
+          }
         ]
       }
     },
@@ -72,16 +87,36 @@
       "subtitle": "薄い線と円形アイコンで、機能を端正に見せる。",
       "productsTitle": "製品 / サービス",
       "serviceItems": [
-        { "title": "メンテナンス" },
-        { "title": "ウェブサイト & オンラインマーケティング" },
-        { "title": "ITサポート & ヘルプデスク" },
-        { "title": "商品管理システム" }
+        {
+          "title": "メンテナンス"
+        },
+        {
+          "title": "ウェブサイト & オンラインマーケティング"
+        },
+        {
+          "title": "ITサポート & ヘルプデスク"
+        },
+        {
+          "title": "商品管理システム"
+        }
       ],
       "features": [
-        { "title": "Web Application", "desc": "企業向けのスケーラブルな開発。" },
-        { "title": "Mobile & Tablet", "desc": "端末を問わない高品質UX。" },
-        { "title": "Integration", "desc": "API/ERP/業務連携を自然に。" },
-        { "title": "Cloud & DevOps", "desc": "CI/CDと基盤で信頼性を担保。" }
+        {
+          "title": "Web Application",
+          "desc": "企業向けのスケーラブルな開発。"
+        },
+        {
+          "title": "Mobile & Tablet",
+          "desc": "端末を問わない高品質UX。"
+        },
+        {
+          "title": "Integration",
+          "desc": "API/ERP/業務連携を自然に。"
+        },
+        {
+          "title": "Cloud & DevOps",
+          "desc": "CI/CDと基盤で信頼性を担保。"
+        }
       ]
     },
     "eTax": {
@@ -115,10 +150,22 @@
       "costTitle": "e-Tax Invoice & e-Receipt 導入によるコスト削減例",
       "costSubtitle": "税務請求書（紙媒体）",
       "costItems": [
-        { "label": "用紙代", "price": "0.8 Baht/セット" },
-        { "label": "印刷費", "price": "2 Baht/セット" },
-        { "label": "保管資材", "price": "0.02 Baht/セット" },
-        { "label": "配送料 (EMS)", "price": "37 Baht/セット" }
+        {
+          "label": "用紙代",
+          "price": "0.8 Baht/セット"
+        },
+        {
+          "label": "印刷費",
+          "price": "2 Baht/セット"
+        },
+        {
+          "label": "保管資材",
+          "price": "0.02 Baht/セット"
+        },
+        {
+          "label": "配送料 (EMS)",
+          "price": "37 Baht/セット"
+        }
       ],
       "costTotal": "合計",
       "costTotalValue": "39.82 Baht",
@@ -156,13 +203,34 @@
       },
       "infoTitle": "会社情報",
       "info": [
-        { "k": "会社名", "v": "Japan System Co., Ltd. & Japan System (Thailand) Co., Ltd." },
-        { "k": "住所", "v": "28th Fl., 253 Asoke Building, Sukhumvit 21 Rd., Khlong Toei Nuea, Watthana, Bangkok 10110." },
-        { "k": "設立", "v": "2015/12" },
-        { "k": "資本金", "v": "2,000,000 THB" },
-        { "k": "代表者", "v": "Tsubasa Hoshino" },
-        { "k": "Email", "v": "info@jpsys-th.com" },
-        { "k": "電話", "v": "02-664-1674" }
+        {
+          "k": "会社名",
+          "v": "Japan System Co., Ltd. & Japan System (Thailand) Co., Ltd."
+        },
+        {
+          "k": "住所",
+          "v": "28th Fl., 253 Asoke Building, Sukhumvit 21 Rd., Khlong Toei Nuea, Watthana, Bangkok 10110."
+        },
+        {
+          "k": "設立",
+          "v": "2015/12"
+        },
+        {
+          "k": "資本金",
+          "v": "2,000,000 THB"
+        },
+        {
+          "k": "代表者",
+          "v": "Tsubasa Hoshino"
+        },
+        {
+          "k": "Email",
+          "v": "info@jpsys-th.com"
+        },
+        {
+          "k": "電話",
+          "v": "02-664-1674"
+        }
       ]
     },
     "contact": {
