@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import Negotiator from "negotiator";
-import { match } from "@formatjs/intl-localematcher";
 import { locales, defaultLocale } from "./i18n/config";
 
 function getLocale(request: NextRequest): string {
@@ -11,17 +10,17 @@ function getLocale(request: NextRequest): string {
     return cookieLocale;
   }
 
-  // 2. Match browser language against supported locales using proper intl matching
+  // 2. Check browser language headers
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
 
-  try {
-    return match(languages, [...locales], defaultLocale);
-  } catch {
-    return defaultLocale;
-  }
+  // 3. Business rule: Japanese browser → /ja, everyone else → /en (defaultLocale)
+  const isJapanese = languages.some((lang) => lang.startsWith("ja"));
+  if (isJapanese) return "ja";
+
+  return defaultLocale; // "en"
 }
 
 export function proxy(request: NextRequest) {
