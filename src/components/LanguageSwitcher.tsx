@@ -11,10 +11,8 @@ export function LanguageSwitcher({ currentLang }: { currentLang: Locale }) {
   const handleLanguageChange = (newLocale: Locale) => {
     if (newLocale === currentLang) return;
     
-    // Replace the first segment of the path with the new locale
     const newPath = pathname.replace(`/${currentLang}`, `/${newLocale}`);
     router.push(newPath);
-    router.refresh(); // Optional, to ensure data is refetched if needed
   };
 
   return (
