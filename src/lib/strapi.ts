@@ -1,249 +1,31 @@
 /**
  * Strapi CMS API client
  * Fetches blog posts from Strapi v4/v5 REST API
- * Deployed Strapi URL: https://authentic-chocolate-641291934d.strapiapp.com
+ * Deployed Strapi URL: https://sublime-ducks-443367ee0e.strapiapp.com/
  *
- * Set NEXT_PUBLIC_STRAPI_URL in .env.local or your hosting environment to override.
+ * Set STRAPI_URL in .env.local or your hosting environment to override.
+ * NOTE: Use STRAPI_URL (not NEXT_PUBLIC_STRAPI_URL) for server-side only fetching
+ *       to avoid exposing the URL to the browser bundle.
  */
 
+import { cache } from "react";
+
 const STRAPI_URL =
-  process.env.NEXT_PUBLIC_STRAPI_URL || "https://authentic-chocolate-641291934d.strapiapp.com";
+  process.env.STRAPI_URL || "https://sublime-ducks-443367ee0e.strapiapp.com";
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN || "";
 
-/* ── Types ─────────────────────────────────────────── */
-
-export type StrapiImageFormat = {
-  url: string;
-  width: number;
-  height: number;
-};
-
-export type StrapiImage = {
-  id: number;
-  url: string;
-  alternativeText: string | null;
-  width: number;
-  height: number;
-  formats?: {
-    thumbnail?: StrapiImageFormat;
-    small?: StrapiImageFormat;
-    medium?: StrapiImageFormat;
-    large?: StrapiImageFormat;
-  };
-};
-
-export type StrapiCategory = {
-  id: number;
-  name: string;
-  slug: string;
-  color?: string;
-};
-
-export type BlogPost = {
-  id: number;
-  documentId?: string;
-  title: string;
-  slug: string;
-  desc: string;          // short description / excerpt
-  content?: string | any[]; // full rich-text content (optional for listing)
-  img: StrapiImage | null;
-  cate: StrapiCategory | null;
-  publishedAt: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type HomepageData = {
-  heroTitle?: string;
-  heroSubtitle?: string;
-  heroCtaPrimary?: string;
-  heroBgImage?: StrapiImage | null;
-  servicesTitle?: string;
-  serviceItems?: {
-    id: number;
-    title: string;
-    desc: string;
-    url?: string;
-    icon?: StrapiImage | null;
-  }[];
-};
-
-export type NewsCard = {
-  id: number;
-  title: string;
-  category?: string;
-  date?: string;
-  url?: string;
-  image?: StrapiImage | null;
-};
-
-export type NewReleaseData = {
-  heroTitle?: string;
-  heroSubtitle?: string;
-  heroBgImage?: StrapiImage | null;
-  eTaxHeading?: string;
-  taxInvoiceSubtitle?: string;
-  eTaxTopImage?: StrapiImage | null;
-  videoId?: string;
-  botImage?: StrapiImage | null;
-  newsCards?: NewsCard[];
-};
-
-export type CompanyData = {
-  heroTitle?: string;
-  heroSubtitle?: string;
-  heroBgImage?: StrapiImage | null;
-  aboutTitle?: string;
-  aboutBody?: string;
-  aboutImage?: StrapiImage | null;
-  infoTitle?: string;
-  infoCompanyName?: string;
-  infoAddress?: string;
-  infoEstablishment?: string;
-  infoCapital?: string;
-  infoRepresentative?: string;
-  infoEmail?: string;
-  infoPhone?: string;
-  infoRows?: {
-    id: number;
-    key: string;
-    value: string;
-  }[];
-};
-
-export type ContactData = {
-  heroTitle?: string;
-  heroSubtitle?: string;
-  heroBgImage?: StrapiImage | null;
-  formTitle?: string;
-  formCompanyName?: string;
-  formName?: string;
-  formEmail?: string;
-  formSubject?: string;
-  formMessage?: string;
-  formNote?: string;
-  officeTitle?: string;
-  officeEmail?: string;
-  officePhone?: string;
-  officeAddress?: string;
-  googleMapsUrl?: string;
-};
-
-export type ItServiceItem = {
-  id: number;
-  title: string;
-  image?: StrapiImage | null;
-};
-
-export type ItFeatureItem = {
-  id: number;
-  title: string;
-  desc: string;
-};
-
-export type ItSystemData = {
-  heroTitle?: string;
-  heroSubtitle?: string;
-  heroBgImage?: StrapiImage | null;
-  productsTitle?: string;
-  serviceItems?: ItServiceItem[];
-  featuresTitle?: string;
-  features?: ItFeatureItem[];
-};
-
-export type ETaxPainItem = {
-  id: number;
-  text: string;
-};
-
-export type ETaxBenefitItem = {
-  id: number;
-  text: string;
-  icon?: StrapiImage | null;
-};
-
-export type ETaxCostItem = {
-  id: number;
-  label: string;
-  price: string;
-};
-
-export type ETaxData = {
-  heroTitle?: string;
-  heroBgImage?: StrapiImage | null;
-  painHeading?: string;
-  painBgImage?: StrapiImage | null;
-  painItems?: ETaxPainItem[];
-  aboutTitle?: string;
-  aboutDesc?: string;
-  definitionEtaxTitle?: string;
-  definitionEtaxDesc?: string;
-  definitionEtaxIcon?: StrapiImage | null;
-  definitionSigTitle?: string;
-  definitionSigDesc?: string;
-  definitionSigIcon?: StrapiImage | null;
-  benefitsTitle?: string;
-  benefits?: ETaxBenefitItem[];
-  mechanismTitle?: string;
-  mechanismDiagram?: StrapiImage | null;
-  introTitle?: string;
-  introDesc?: string;
-  costTitle?: string;
-  costSubtitle?: string;
-  costItems?: ETaxCostItem[];
-  costTotal?: string;
-  costTotalValue?: string;
-  costMonthlyLabel?: string;
-  costMonthlyValue?: string;
-  costMonthlyReduction?: string;
-  contactBtn?: string;
-};
-
-export type MarketingSocialIcon = {
-  id: number;
-  label: string;
-  icon?: StrapiImage | null;
-};
-
-export type MarketingData = {
-  heroTitle?: string;
-  heroBgImage?: StrapiImage | null;
-  cardWebsite?: string;
-  cardWebsiteBg?: StrapiImage | null;
-  cardWebsiteIcon?: StrapiImage | null;
-  cardWebsiteLabel?: string;
-  cardOnlineMarketing?: string;
-  cardOnlineMarketingBg?: StrapiImage | null;
-  socialIcons?: MarketingSocialIcon[];
-};
-
-export type MyLogStarAccordionItem = {
-  id: number;
-  sectionId: string;
-  title: string;
-  content: string;
-  image?: StrapiImage | null;
-};
-
-export type MyLogStarData = {
-  heroTitle?: string;
-  heroDesc?: string;
-  youtubeVideoId?: string;
-  mediaImage1?: StrapiImage | null;
-  mediaImage2?: StrapiImage | null;
-  featureTitle?: string;
-  featureLogCollectionTitle?: string;
-  featureLogCollectionDesc?: string;
-  featureLogAvailabilityTitle?: string;
-  featureLogAvailabilityDesc?: string;
-  accordionItems?: MyLogStarAccordionItem[];
-};
+import type { StrapiImage, StrapiImageFormat, StrapiCategory, BlogPost, HomepageData, NewsCard, NewReleaseData, CompanyData, ContactData, ItServiceItem, ItFeatureItem, ItSystemData, ETaxPainItem, ETaxBenefitItem, ETaxCostItem, ETaxData, MarketingSocialIcon, MarketingData, MyLogStarAccordionItem, MyLogStarData } from '@/types/strapi';
+export type { StrapiImage, StrapiImageFormat, StrapiCategory, BlogPost, HomepageData, NewsCard, NewReleaseData, CompanyData, ContactData, ItServiceItem, ItFeatureItem, ItSystemData, ETaxPainItem, ETaxBenefitItem, ETaxCostItem, ETaxData, MarketingSocialIcon, MarketingData, MyLogStarAccordionItem, MyLogStarData };
 
 /* ── Internal helpers ───────────────────────────────── */
 
-function buildHeaders(): HeadersInit {
+/**
+ * useAuth=false  → public endpoints (blog, homepage, categories, etc.)
+ * useAuth=true   → protected endpoints that require a token
+ */
+function buildHeaders(useAuth = false): HeadersInit {
   const h: HeadersInit = { "Content-Type": "application/json" };
-  if (STRAPI_TOKEN) h["Authorization"] = `Bearer ${STRAPI_TOKEN}`;
+  if (useAuth && STRAPI_TOKEN) h["Authorization"] = `Bearer ${STRAPI_TOKEN}`;
   return h;
 }
 
@@ -263,45 +45,68 @@ export function getStrapiImageUrl(img: StrapiImage | null): string {
   return `${STRAPI_URL}${url}`;
 }
 
-/* ── API calls ──────────────────────────────────────── */
+/* ── Image populate helper ──────────────────────────── */
 
-const POPULATE = "populate[img][fields][0]=url&populate[img][fields][1]=alternativeText&populate[img][fields][2]=width&populate[img][fields][3]=height&populate[img][fields][4]=formats&populate[categories][fields][0]=name&populate[categories][fields][1]=slug&populate[categories][fields][2]=color";
+/**
+ * Builds populate params for an image field.
+ * Omits `formats` by default — only request it when you actually need
+ * thumbnail/small/medium/large variants to keep response payloads small.
+ */
+function imgPopulate(field: string, includeFormats = false): string {
+  const base = [
+    `populate[${field}][fields][0]=url`,
+    `populate[${field}][fields][1]=alternativeText`,
+    `populate[${field}][fields][2]=width`,
+    `populate[${field}][fields][3]=height`,
+  ];
+  if (includeFormats) base.push(`populate[${field}][fields][4]=formats`);
+  return base.join("&");
+}
+
+/* ── POPULATE strings ───────────────────────────────── */
+
+// Blog posts: keep formats so components can pick the right size
+const BLOG_POPULATE =
+  `${imgPopulate("img", true)}` +
+  "&populate[categories][fields][0]=name" +
+  "&populate[categories][fields][1]=slug" +
+  "&populate[categories][fields][2]=color";
+
+/* ── API calls ──────────────────────────────────────── */
 
 /**
  * Fetch paginated list of blog posts.
- * @param page  1-based page number
- * @param limit items per page
- * @param cateSlug optional category slug filter
+ * Wrapped in React `cache()` so multiple Server Components calling this
+ * within the same render deduplicate to a single network request.
  */
-export async function getBlogPosts(
+export const getBlogPosts = cache(async (
   page = 1,
   limit = 9,
   cateSlug?: string
-): Promise<{ posts: BlogPost[]; total: number; pageCount: number }> {
+): Promise<{ posts: BlogPost[]; total: number; pageCount: number }> => {
   const filters = cateSlug
     ? `&filters[categories][slug][$eq]=${encodeURIComponent(cateSlug)}`
     : "";
 
-  const url = `${STRAPI_URL}/api/blog-posts?${POPULATE}&sort=publishedAt:desc&pagination[page]=${page}&pagination[pageSize]=${limit}${filters}`;
+  const url = `${STRAPI_URL}/api/blog-posts?${BLOG_POPULATE}&sort=publishedAt:desc&pagination[page]=${page}&pagination[pageSize]=${limit}${filters}`;
 
   try {
     const res = await fetch(url, {
-      headers: buildHeaders(),
-      next: { revalidate: 60 },
+      headers: buildHeaders(false), // public endpoint
+      next: { tags: ["blog"] },
     });
 
     if (!res.ok) throw new Error(`Strapi ${res.status}: ${res.statusText}`);
 
     const json = await res.json();
-
-    /* Support both Strapi v4 (data[].attributes) and v5 (data[] flat) */
-    const isV4 =
-      json.data?.[0] && "attributes" in (json.data[0] ?? {});
+    const isV4 = json.data?.[0] && "attributes" in (json.data[0] ?? {});
 
     const posts: BlogPost[] = (json.data ?? []).map(
       (item: Record<string, unknown>) => {
-        const mapped = isV4 ? flattenV4<any>(item as { id: number; attributes: Record<string, unknown> }) : item as any;
-        
+        const mapped = isV4
+          ? flattenV4<any>(item as { id: number; attributes: Record<string, unknown> })
+          : (item as any);
+
         if (mapped.categories && Array.isArray(mapped.categories) && mapped.categories.length > 0) {
           mapped.cate = mapped.categories[0];
         } else if (mapped.categories && !Array.isArray(mapped.categories)) {
@@ -321,16 +126,21 @@ export async function getBlogPosts(
     console.error("[Strapi] getBlogPosts failed:", err);
     return { posts: [], total: 0, pageCount: 0 };
   }
-}
+});
 
-/** Fetch a single blog post by slug */
-export async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  const url = `${STRAPI_URL}/api/blog-posts?${POPULATE}&filters[slug][$eq]=${encodeURIComponent(slug)}`;
+/**
+ * Fetch a single blog post by slug.
+ * Uses slug filter on the collection (compatible with both v4 and v5).
+ * If you migrate fully to Strapi v5, prefer fetching by documentId directly:
+ *   /api/blog-posts/:documentId
+ */
+export const getBlogPost = cache(async (slug: string): Promise<BlogPost | null> => {
+  const url = `${STRAPI_URL}/api/blog-posts?${BLOG_POPULATE}&filters[slug][$eq]=${encodeURIComponent(slug)}&pagination[pageSize]=1`;
 
   try {
     const res = await fetch(url, {
-      headers: buildHeaders(),
-      next: { revalidate: 60 },
+      headers: buildHeaders(false), // public endpoint
+      next: { tags: ["blog", slug] },
     });
 
     if (!res.ok) throw new Error(`Strapi ${res.status}: ${res.statusText}`);
@@ -355,16 +165,16 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     console.error("[Strapi] getBlogPost failed:", err);
     return null;
   }
-}
+});
 
 /** Fetch all categories */
-export async function getBlogCategories(): Promise<StrapiCategory[]> {
+export const getBlogCategories = cache(async (): Promise<StrapiCategory[]> => {
   const url = `${STRAPI_URL}/api/categories?fields[0]=name&fields[1]=slug&fields[2]=color&sort=name:asc`;
 
   try {
     const res = await fetch(url, {
-      headers: buildHeaders(),
-      next: { revalidate: 300 },
+      headers: buildHeaders(false), // public endpoint
+      next: { tags: ["category"] },
     });
 
     if (!res.ok) return [];
@@ -380,24 +190,27 @@ export async function getBlogCategories(): Promise<StrapiCategory[]> {
   } catch {
     return [];
   }
-}
+});
 
 /** Fetch Homepage Content */
-export async function getHomepageData(locale?: string): Promise<HomepageData | null> {
+export const getHomepageData = cache(async (locale?: string): Promise<HomepageData | null> => {
   const localeQuery = locale ? `&locale=${locale}` : "";
-  const url = `${STRAPI_URL}/api/homepage?populate[0]=heroBgImage&populate[1]=serviceItems.icon${localeQuery}`;
+  const url =
+    `${STRAPI_URL}/api/homepage` +
+    `?${imgPopulate("heroBgImage")}` +
+    `&populate[serviceItems][populate][icon][fields][0]=url` +
+    `&populate[serviceItems][populate][icon][fields][1]=alternativeText` +
+    `&populate[serviceItems][populate][icon][fields][2]=width` +
+    `&populate[serviceItems][populate][icon][fields][3]=height` +
+    localeQuery;
 
   try {
     const res = await fetch(url, {
-      headers: buildHeaders(),
-      cache: 'no-store',
-      next: { revalidate: 0 },
+      headers: buildHeaders(false), // public endpoint
+      next: { tags: ["homepage", locale || "th"] },
     });
 
-    if (!res.ok) {
-      // Return null so frontend can fallback to translation JSON
-      return null;
-    }
+    if (!res.ok) return null;
 
     const json = await res.json();
     const raw = json.data;
@@ -416,7 +229,7 @@ export async function getHomepageData(locale?: string): Promise<HomepageData | n
       servicesTitle: mapped.servicesTitle,
       serviceItems: (mapped.serviceItems || []).map((it: any) => ({
         id: it.id,
-        title: it.Title || it.title || "", // Fallback to Title because user typed capital T in Strapi
+        title: it.Title || it.title || "",
         desc: it.desc || "",
         url: it.url || "",
         icon: it.icon || null,
@@ -426,18 +239,26 @@ export async function getHomepageData(locale?: string): Promise<HomepageData | n
     console.error("[Strapi] getHomepageData failed:", err);
     return null;
   }
-}
+});
 
 /** Fetch New Release Content */
-export async function getNewReleaseData(locale?: string): Promise<NewReleaseData | null> {
+export const getNewReleaseData = cache(async (locale?: string): Promise<NewReleaseData | null> => {
   const localeQuery = locale ? `&locale=${locale}` : "";
-  const url = `${STRAPI_URL}/api/new-release?populate[0]=heroBgImage&populate[1]=eTaxTopImage&populate[2]=botImage&populate[3]=newsCards.image${localeQuery}`;
+  const url =
+    `${STRAPI_URL}/api/new-release` +
+    `?${imgPopulate("heroBgImage")}` +
+    `&${imgPopulate("eTaxTopImage")}` +
+    `&${imgPopulate("botImage")}` +
+    `&populate[newsCards][populate][image][fields][0]=url` +
+    `&populate[newsCards][populate][image][fields][1]=alternativeText` +
+    `&populate[newsCards][populate][image][fields][2]=width` +
+    `&populate[newsCards][populate][image][fields][3]=height` +
+    localeQuery;
 
   try {
     const res = await fetch(url, {
-      headers: buildHeaders(),
-      cache: 'no-store',
-      next: { revalidate: 0 },
+      headers: buildHeaders(false), // public endpoint
+      next: { tags: ["new-release", locale || "th"] },
     });
 
     if (!res.ok) return null;
@@ -471,18 +292,21 @@ export async function getNewReleaseData(locale?: string): Promise<NewReleaseData
     console.error("[Strapi] getNewReleaseData failed:", err);
     return null;
   }
-}
+});
 
 /** Fetch Company Profile Content */
-export async function getCompanyData(locale?: string): Promise<CompanyData | null> {
+export const getCompanyData = cache(async (locale?: string): Promise<CompanyData | null> => {
   const localeQuery = locale ? `&locale=${locale}` : "";
-  const url = `${STRAPI_URL}/api/company?populate[0]=heroBgImage&populate[1]=aboutImage${localeQuery}`;
+  const url =
+    `${STRAPI_URL}/api/company` +
+    `?${imgPopulate("heroBgImage")}` +
+    `&${imgPopulate("aboutImage")}` +
+    localeQuery;
 
   try {
     const res = await fetch(url, {
-      headers: buildHeaders(),
-      cache: 'no-store',
-      next: { revalidate: 0 },
+      headers: buildHeaders(false), // public endpoint
+      next: { tags: ["company", locale || "th"] }, // company info rarely changes
     });
 
     if (!res.ok) return null;
@@ -519,18 +343,20 @@ export async function getCompanyData(locale?: string): Promise<CompanyData | nul
     console.error("[Strapi] getCompanyData failed:", err);
     return null;
   }
-}
+});
 
 /** Fetch Contact Page Content */
-export async function getContactData(locale?: string): Promise<ContactData | null> {
+export const getContactData = cache(async (locale?: string): Promise<ContactData | null> => {
   const localeQuery = locale ? `&locale=${locale}` : "";
-  const url = `${STRAPI_URL}/api/contact?populate[0]=heroBgImage${localeQuery}`;
+  const url =
+    `${STRAPI_URL}/api/contact` +
+    `?${imgPopulate("heroBgImage")}` +
+    localeQuery;
 
   try {
     const res = await fetch(url, {
-      headers: buildHeaders(),
-      cache: 'no-store',
-      next: { revalidate: 0 },
+      headers: buildHeaders(false), // public endpoint
+      next: { tags: ["contact", locale || "th"] }, // contact info rarely changes
     });
 
     if (!res.ok) return null;
@@ -563,18 +389,26 @@ export async function getContactData(locale?: string): Promise<ContactData | nul
     console.error("[Strapi] getContactData failed:", err);
     return null;
   }
-}
+});
 
 /** Fetch IT System Page Content */
-export async function getItSystemData(locale?: string): Promise<ItSystemData | null> {
+export const getItSystemData = cache(async (locale?: string): Promise<ItSystemData | null> => {
   const localeQuery = locale ? `&locale=${locale}` : "";
-  const url = `${STRAPI_URL}/api/it-system?populate[0]=heroBgImage&populate[1]=serviceItems.image&populate[2]=features${localeQuery}`;
+  const url =
+    `${STRAPI_URL}/api/it-system` +
+    `?${imgPopulate("heroBgImage")}` +
+    `&populate[serviceItems][populate][image][fields][0]=url` +
+    `&populate[serviceItems][populate][image][fields][1]=alternativeText` +
+    `&populate[serviceItems][populate][image][fields][2]=width` +
+    `&populate[serviceItems][populate][image][fields][3]=height` +
+    `&populate[features][fields][0]=title` +
+    `&populate[features][fields][1]=desc` +
+    localeQuery;
 
   try {
     const res = await fetch(url, {
-      headers: buildHeaders(),
-      cache: 'no-store',
-      next: { revalidate: 0 },
+      headers: buildHeaders(false), // public endpoint
+      next: { tags: ["it-system", locale || "th"] },
     });
 
     if (!res.ok) return null;
@@ -607,18 +441,31 @@ export async function getItSystemData(locale?: string): Promise<ItSystemData | n
     console.error("[Strapi] getItSystemData failed:", err);
     return null;
   }
-}
+});
 
 /** Fetch E-Tax Page Content */
-export async function getETaxData(locale?: string): Promise<ETaxData | null> {
+export const getETaxData = cache(async (locale?: string): Promise<ETaxData | null> => {
   const localeQuery = locale ? `&locale=${locale}` : "";
-  const url = `${STRAPI_URL}/api/e-tax?populate[0]=heroBgImage&populate[1]=painBgImage&populate[2]=painItems&populate[3]=definitionEtaxIcon&populate[4]=definitionSigIcon&populate[5]=benefits.icon&populate[6]=mechanismDiagram&populate[7]=costItems${localeQuery}`;
+  const url =
+    `${STRAPI_URL}/api/e-tax` +
+    `?${imgPopulate("heroBgImage")}` +
+    `&${imgPopulate("painBgImage")}` +
+    `&populate[painItems][fields][0]=text` +
+    `&${imgPopulate("definitionEtaxIcon")}` +
+    `&${imgPopulate("definitionSigIcon")}` +
+    `&populate[benefits][populate][icon][fields][0]=url` +
+    `&populate[benefits][populate][icon][fields][1]=alternativeText` +
+    `&populate[benefits][populate][icon][fields][2]=width` +
+    `&populate[benefits][populate][icon][fields][3]=height` +
+    `&${imgPopulate("mechanismDiagram")}` +
+    `&populate[costItems][fields][0]=label` +
+    `&populate[costItems][fields][1]=price` +
+    localeQuery;
 
   try {
     const res = await fetch(url, {
-      headers: buildHeaders(),
-      cache: 'no-store',
-      next: { revalidate: 0 },
+      headers: buildHeaders(false), // public endpoint
+      next: { tags: ["e-tax", locale || "th"] },
     });
 
     if (!res.ok) return null;
@@ -675,18 +522,27 @@ export async function getETaxData(locale?: string): Promise<ETaxData | null> {
     console.error("[Strapi] getETaxData failed:", err);
     return null;
   }
-}
+});
 
 /** Fetch Marketing Page Content */
-export async function getMarketingData(locale?: string): Promise<MarketingData | null> {
+export const getMarketingData = cache(async (locale?: string): Promise<MarketingData | null> => {
   const localeQuery = locale ? `&locale=${locale}` : "";
-  const url = `${STRAPI_URL}/api/marketing?populate[0]=heroBgImage&populate[1]=cardWebsiteBg&populate[2]=cardWebsiteIcon&populate[3]=cardOnlineMarketingBg&populate[4]=socialIcons.icon${localeQuery}`;
+  const url =
+    `${STRAPI_URL}/api/marketing` +
+    `?${imgPopulate("heroBgImage")}` +
+    `&${imgPopulate("cardWebsiteBg")}` +
+    `&${imgPopulate("cardWebsiteIcon")}` +
+    `&${imgPopulate("cardOnlineMarketingBg")}` +
+    `&populate[socialIcons][populate][icon][fields][0]=url` +
+    `&populate[socialIcons][populate][icon][fields][1]=alternativeText` +
+    `&populate[socialIcons][populate][icon][fields][2]=width` +
+    `&populate[socialIcons][populate][icon][fields][3]=height` +
+    localeQuery;
 
   try {
     const res = await fetch(url, {
-      headers: buildHeaders(),
-      cache: 'no-store',
-      next: { revalidate: 0 },
+      headers: buildHeaders(false), // public endpoint
+      next: { tags: ["marketing", locale || "th"] },
     });
 
     if (!res.ok) return null;
@@ -717,18 +573,25 @@ export async function getMarketingData(locale?: string): Promise<MarketingData |
     console.error("[Strapi] getMarketingData failed:", err);
     return null;
   }
-}
+});
 
 /** Fetch MyLogStar Page Content */
-export async function getMyLogStarData(locale?: string): Promise<MyLogStarData | null> {
+export const getMyLogStarData = cache(async (locale?: string): Promise<MyLogStarData | null> => {
   const localeQuery = locale ? `&locale=${locale}` : "";
-  const url = `${STRAPI_URL}/api/my-log-star?populate[0]=mediaImage1&populate[1]=mediaImage2&populate[2]=accordionItems.image${localeQuery}`;
+  const url =
+    `${STRAPI_URL}/api/my-log-star` +
+    `?${imgPopulate("mediaImage1")}` +
+    `&${imgPopulate("mediaImage2")}` +
+    `&populate[accordionItems][populate][image][fields][0]=url` +
+    `&populate[accordionItems][populate][image][fields][1]=alternativeText` +
+    `&populate[accordionItems][populate][image][fields][2]=width` +
+    `&populate[accordionItems][populate][image][fields][3]=height` +
+    localeQuery;
 
   try {
     const res = await fetch(url, {
-      headers: buildHeaders(),
-      cache: 'no-store',
-      next: { revalidate: 0 },
+      headers: buildHeaders(false), // public endpoint
+      next: { tags: ["my-log-star", locale || "th"] },
     });
 
     if (!res.ok) return null;
@@ -763,10 +626,4 @@ export async function getMyLogStarData(locale?: string): Promise<MyLogStarData |
     console.error("[Strapi] getMyLogStarData failed:", err);
     return null;
   }
-}
-
-
-
-
-
-
+});

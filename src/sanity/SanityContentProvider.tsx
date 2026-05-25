@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import type { Language } from "@/i18n/translations";
+import type { Locale } from "@/i18n/config";
 
 /* ── Types ── */
 type LocalizedField = {
@@ -20,7 +20,7 @@ type SanityContentValue = {
   homePage: HomePageData | null;
   loaded: boolean;
   /** Get localized text from a page field */
-  getHomeText: (field: keyof HomePageData, lang: Language) => string | undefined;
+  getHomeText: (field: keyof HomePageData, lang: Locale) => string | undefined;
 };
 
 const SanityContentContext = createContext<SanityContentValue>({
@@ -29,10 +29,9 @@ const SanityContentContext = createContext<SanityContentValue>({
   getHomeText: () => undefined,
 });
 
-function getLocalized(field: LocalizedField | undefined, lang: Language): string | undefined {
+function getLocalized(field: LocalizedField | undefined, lang: Locale): string | undefined {
   if (!field) return undefined;
-  const langKey = lang === "jp" ? "ja" : lang;
-  const value = field[langKey as keyof LocalizedField];
+  const value = field[lang as keyof LocalizedField];
   return value || undefined;
 }
 
@@ -64,7 +63,7 @@ export function SanityContentProvider({ children }: { children: React.ReactNode 
       });
   }, []);
 
-  const getHomeText = (field: keyof HomePageData, lang: Language): string | undefined => {
+  const getHomeText = (field: keyof HomePageData, lang: Locale): string | undefined => {
     if (!homePage) return undefined;
     return getLocalized(homePage[field] as LocalizedField | undefined, lang);
   };

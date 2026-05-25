@@ -1,4 +1,4 @@
-const STRAPI_URL = "https://authentic-chocolate-641291934d.strapiapp.com";
+const STRAPI_URL = "https://sublime-ducks-443367ee0e.strapiapp.com";
 
 async function testConnection() {
   console.log("🔍 Testing Strapi connection...\n");

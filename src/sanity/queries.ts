@@ -1,5 +1,5 @@
 import { client } from "@/sanity/client";
-import type { Language } from "@/i18n/translations";
+import type { Locale } from "@/i18n/config";
 
 /* ── Types ── */
 export type SanityTextOverride = {
@@ -72,14 +72,14 @@ export async function getAllImages(): Promise<SanityImage[]> {
 /** Get the correct language content from a Sanity text override */
 export function getLocalizedContent(
   item: SanityTextOverride,
-  lang: Language
+  lang: Locale
 ): string | undefined {
   switch (lang) {
     case "th":
       return item.contentTh;
     case "en":
       return item.contentEn;
-    case "jp":
+    case "ja":
       return item.contentJa;
     default:
       return item.contentEn;

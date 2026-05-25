@@ -7,7 +7,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState, useEffect } from "react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Container } from "@/components/Container";
-import { useLanguage } from "@/i18n/LanguageContext";
+import type { Dictionary } from "@/i18n/dictionaries";
+import type { Locale } from "@/i18n/config";
 
 const topLinks = [
   { href: "/", key: "home" as const },
@@ -23,16 +24,17 @@ const solutionLinks = [
   { href: "/my-log-star", key: "myLogStar" as const },
 ];
 
-export function Navbar() {
+export function Navbar({ dict, lang }: { dict: Dictionary; lang: Locale }) {
   const pathname = usePathname();
-  const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSolutionOpen, setMobileSolutionOpen] = useState(false);
 
+  // Helper to prepend locale to paths if necessary. Pathname from Next.js 
+  // app router includes the locale segment e.g., `/en/contact`.
   const inSolution = useMemo(() => {
-    return solutionLinks.some((l) => l.href === pathname);
-  }, [pathname]);
+    return solutionLinks.some((l) => pathname.endsWith(l.href) || pathname === `/${lang}${l.href}`);
+  }, [pathname, lang]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -58,7 +60,7 @@ export function Navbar() {
         <Container>
           <div className="flex h-16 items-center justify-between gap-4">
             <Link
-              href="/"
+              href={`/${lang}`}
               className="group flex items-center gap-3 text-sm font-semibold tracking-tight text-slate-900"
             >
               <span className="relative h-8 w-8 overflow-hidden rounded-full">
@@ -71,18 +73,19 @@ export function Navbar() {
                   priority
                 />
               </span>
-              <span className="hidden sm:block">{t.brand}</span>
+              <span className="hidden sm:block">{dict.brand}</span>
               <span className="sm:hidden">JST</span>
             </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden items-center gap-1 md:flex">
               {topLinks.slice(0, 1).map((l) => {
-                const active = pathname === l.href;
+                const href = l.href === "/" ? `/${lang}` : `/${lang}${l.href}`;
+                const active = pathname === href || pathname === href + "/";
                 return (
                   <Link
                     key={l.href}
-                    href={l.href}
+                    href={href}
                     className={
                       "relative rounded-full px-3 py-2 text-xs font-semibold tracking-wide transition-colors " +
                       (active
@@ -91,7 +94,7 @@ export function Navbar() {
                     }
                     data-cursor="interactive"
                   >
-                    {t.nav[l.key]}
+                    {dict.nav[l.key]}
                     {active ? (
                       <span className="absolute inset-x-2 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-sky-500 to-indigo-500" />
                     ) : null}
@@ -116,7 +119,7 @@ export function Navbar() {
                   aria-expanded={open}
                   data-cursor="interactive"
                 >
-                  {t.nav.solution}
+                  {dict.nav.solution}
                   <span
                     className={
                       "text-slate-400 transition-transform duration-200 " +
@@ -143,7 +146,8 @@ export function Navbar() {
                     >
                       <div className="p-2">
                         {solutionLinks.map((l, idx) => {
-                          const active = pathname === l.href;
+                          const href = `/${lang}${l.href}`;
+                          const active = pathname === href || pathname === href + "/";
                           return (
                             <motion.div
                               key={l.href}
@@ -152,7 +156,7 @@ export function Navbar() {
                               transition={{ duration: 0.22, delay: 0.03 * idx }}
                             >
                               <Link
-                                href={l.href}
+                                href={href}
                                 className={
                                   "group flex items-center justify-between rounded-xl px-3 py-2 text-sm font-semibold transition-colors " +
                                   (active
@@ -163,7 +167,7 @@ export function Navbar() {
                                 data-cursor="interactive"
                                 role="menuitem"
                               >
-                                <span>{t.nav[l.key]}</span>
+                                <span>{dict.nav[l.key]}</span>
                                 <span
                                   className={
                                     "text-sky-500/80 opacity-0 transition-opacity group-hover:opacity-100 " +
@@ -184,11 +188,12 @@ export function Navbar() {
               </div>
 
               {topLinks.slice(1).map((l) => {
-                const active = pathname === l.href;
+                const href = `/${lang}${l.href}`;
+                const active = pathname === href || pathname === href + "/";
                 return (
                   <Link
                     key={l.href}
-                    href={l.href}
+                    href={href}
                     className={
                       "relative rounded-full px-3 py-2 text-xs font-semibold tracking-wide transition-colors " +
                       (active
@@ -197,7 +202,7 @@ export function Navbar() {
                     }
                     data-cursor="interactive"
                   >
-                    {t.nav[l.key]}
+                    {dict.nav[l.key]}
                     {active ? (
                       <span className="absolute inset-x-2 -bottom-0.5 h-px bg-sky-500/70" />
                     ) : null}
@@ -207,13 +212,13 @@ export function Navbar() {
             </nav>
 
             <div className="flex items-center gap-2">
-              <LanguageSwitcher />
+              <LanguageSwitcher currentLang={lang} />
               <Link
-                href="/contact"
+                href={`/${lang}/contact`}
                 className="hidden rounded-full bg-slate-900 px-4 py-2 text-xs font-semibold tracking-wide text-white shadow-lg shadow-slate-900/10 transition-all hover:bg-slate-800 hover:-translate-y-0.5 hover:shadow-xl shimmer md:inline-flex"
                 data-cursor="interactive"
               >
-                {t.nav.contact}
+                {dict.nav.contact}
               </Link>
 
               {/* Mobile hamburger button */}
@@ -275,7 +280,7 @@ export function Navbar() {
               {/* Drawer Header */}
               <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
                 <Link
-                  href="/"
+                  href={`/${lang}`}
                   className="flex items-center gap-2"
                   onClick={() => setMobileOpen(false)}
                 >
@@ -287,7 +292,7 @@ export function Navbar() {
                     className="rounded-full"
                   />
                   <span className="text-sm font-bold text-slate-900">
-                    {t.brand}
+                    {dict.brand}
                   </span>
                 </Link>
                 <button
@@ -312,7 +317,8 @@ export function Navbar() {
                 <div className="space-y-1">
                   {/* Home link */}
                   {topLinks.slice(0, 1).map((l) => {
-                    const active = pathname === l.href;
+                    const href = l.href === "/" ? `/${lang}` : `/${lang}${l.href}`;
+                    const active = pathname === href || pathname === href + "/";
                     return (
                       <motion.div
                         key={l.href}
@@ -321,7 +327,7 @@ export function Navbar() {
                         transition={{ delay: 0.1 }}
                       >
                         <Link
-                          href={l.href}
+                          href={href}
                           onClick={() => setMobileOpen(false)}
                           className={
                             "flex items-center gap-3 rounded-2xl px-4 py-3.5 text-sm font-semibold transition-colors " +
@@ -336,7 +342,7 @@ export function Navbar() {
                               <polyline points="9 22 9 12 15 12 15 22" />
                             </svg>
                           </span>
-                          {t.nav[l.key]}
+                          {dict.nav[l.key]}
                         </Link>
                       </motion.div>
                     );
@@ -368,7 +374,7 @@ export function Navbar() {
                             <line x1="12" y1="17" x2="12" y2="21" />
                           </svg>
                         </span>
-                        {t.nav.solution}
+                        {dict.nav.solution}
                       </div>
                       <span
                         className={
@@ -394,7 +400,8 @@ export function Navbar() {
                         >
                           <div className="ml-6 mt-1 space-y-1 border-l-2 border-sky-100 pl-4">
                             {solutionLinks.map((l, idx) => {
-                              const active = pathname === l.href;
+                              const href = `/${lang}${l.href}`;
+                              const active = pathname === href || pathname === href + "/";
                               return (
                                 <motion.div
                                   key={l.href}
@@ -406,7 +413,7 @@ export function Navbar() {
                                   }}
                                 >
                                   <Link
-                                    href={l.href}
+                                    href={href}
                                     onClick={() => setMobileOpen(false)}
                                     className={
                                       "flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors " +
@@ -423,7 +430,7 @@ export function Navbar() {
                                           : "bg-sky-400")
                                       }
                                     />
-                                    {t.nav[l.key]}
+                                    {dict.nav[l.key]}
                                   </Link>
                                 </motion.div>
                               );
@@ -436,7 +443,8 @@ export function Navbar() {
 
                   {/* Other top links */}
                   {topLinks.slice(1).map((l, idx) => {
-                    const active = pathname === l.href;
+                    const href = `/${lang}${l.href}`;
+                    const active = pathname === href || pathname === href + "/";
                     const icons = [
                       // New Release
                       <svg key="nr" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -452,11 +460,6 @@ export function Navbar() {
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                         <polyline points="22,6 12,13 2,6" />
                       </svg>,
-                      // Blog
-                      <svg key="bl" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-                      </svg>,
                     ];
                     return (
                       <motion.div
@@ -466,7 +469,7 @@ export function Navbar() {
                         transition={{ delay: 0.2 + idx * 0.05 }}
                       >
                         <Link
-                          href={l.href}
+                          href={href}
                           onClick={() => setMobileOpen(false)}
                           className={
                             "flex items-center gap-3 rounded-2xl px-4 py-3.5 text-sm font-semibold transition-colors " +
@@ -478,7 +481,7 @@ export function Navbar() {
                           <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-sky-50 to-indigo-50 text-sky-600">
                             {icons[idx]}
                           </span>
-                          {t.nav[l.key]}
+                          {dict.nav[l.key]}
                         </Link>
                       </motion.div>
                     );
@@ -489,11 +492,11 @@ export function Navbar() {
               {/* Drawer Footer */}
               <div className="border-t border-slate-100 px-6 py-5">
                 <Link
-                  href="/contact"
+                  href={`/${lang}/contact`}
                   onClick={() => setMobileOpen(false)}
                   className="flex w-full items-center justify-center rounded-2xl bg-gradient-to-r from-slate-900 to-slate-800 px-5 py-3.5 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 transition-all hover:shadow-xl active:scale-[0.98]"
                 >
-                  {t.nav.contact}
+                  {dict.nav.contact}
                   <span className="ml-2 text-white/60">→</span>
                 </Link>
               </div>

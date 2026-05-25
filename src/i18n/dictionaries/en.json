@@ -1,0 +1,204 @@
+{
+  "brand": "Japan System Thailand",
+  "nav": {
+    "home": "Home",
+    "solution": "Solution",
+    "newRelease": "New Release",
+    "itSystem": "IT System",
+    "eTax": "e-Tax Invoice & e-Receipt",
+    "marketing": "Marketing",
+    "myLogStar": "My Log Star",
+    "blog": "Blog",
+    "company": "Company",
+    "contact": "Contact"
+  },
+  "common": {
+    "readMore": "READ MORE",
+    "learnMore": "Learn more",
+    "send": "Send message",
+    "sent": "Sent",
+    "copyright": "Copyright Japan System Co., Ltd. & Japan System (Thailand) Co., Ltd. All rights Reserved.",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "addressValue": "28th Fl., 253 Asoke Building, Sukhumvit 21 Rd., Khlong Toei Nuea, Watthana, Bangkok 10110."
+  },
+  "pages": {
+    "home": {
+      "metaTitle": "",
+      "hero": {
+        "title": "We will help your company with DX (Digital Transformation).",
+        "subtitle": "Minimal, precise, and engineered for enterprise—system development, e-Tax solutions, and DX marketing.",
+        "ctaPrimary": "Explore services"
+      },
+      "services": {
+        "title": "Our Service",
+        "items": [
+          { "title": "IT System", "desc": "Custom software development and system integration solutions tailored to your business needs." },
+          { "title": "e-Tax Invoice & e-Receipt", "desc": "Comprehensive tax management and compliance solutions for modern businesses." },
+          { "title": "Website & Online marketing", "desc": "Digital transformation and IT marketing strategies to boost your online presence." },
+          { "title": "Mylogstar", "desc": "Advanced security solutions and comprehensive logging systems for data protection." },
+          { "title": "New Release", "desc": "Expert consulting services to guide your digital transformation journey." }
+        ]
+      }
+    },
+    "newRelease": {
+      "metaTitle": "New Release",
+      "title": "New Release",
+      "subtitle": "Clean, focused product updates with enterprise polish.",
+      "eTaxHeading": "Refers to the use of tax invoices,",
+      "taxInvoiceSubtitle": "Tax Invoice (Paper medium)",
+      "costTable": {
+        "option": "Option",
+        "value": "Value",
+        "usePaper": "Use paper",
+        "usePaperVal": "0.8 Baht/set",
+        "printingFee": "Printing fee",
+        "printingFeeVal": "2 Baht/set",
+        "storageMaterial": "Storage material",
+        "storageMaterialVal": "0.02 Baht/set",
+        "deliveryFee": "Delivery fee (EMS)",
+        "deliveryFeeVal": "37 Baht/set",
+        "total": "Total",
+        "totalVal": "39.82 Baht"
+      },
+      "monthlyCostLabel": "Monthly cost when the circulation is 1,000 copies / month",
+      "monthlyCostValue": "39.82 Baht x 1,000 = 39,820 Baht / month",
+      "monthlyCostReduction": "Monthly 39,820 baht + labor cost reduction!"
+    },
+    "itSystem": {
+      "metaTitle": "IT System Solutions",
+      "title": "IT System",
+      "subtitle": "Feature-rich solutions delivered with thin-line precision.",
+      "productsTitle": "Products / Services",
+      "serviceItems": [
+        { "title": "Maintenance" },
+        { "title": "Website & Online Marketing" },
+        { "title": "IT Support & Help Desk" },
+        { "title": "Product Management System" }
+      ],
+      "features": [
+        { "title": "Web Application", "desc": "Scalable app delivery for modern enterprises." },
+        { "title": "Mobile & Tablet", "desc": "High-quality UX across devices and contexts." },
+        { "title": "Integration", "desc": "APIs, ERP, and workflow automation that fit." },
+        { "title": "Cloud & DevOps", "desc": "Reliable CI/CD and infrastructure foundations." }
+      ]
+    },
+    "eTax": {
+      "metaTitle": "e-Tax Invoice & e-Receipt",
+      "title": "e-Tax Invoice & e-Receipt",
+      "painHeading": "Are you wasting your time on handwritten signatures on various documents?",
+      "painTitle": "Pain Points",
+      "painItems": [
+        "Too many documents to sign",
+        "Sometimes I have to go to the office just for one document",
+        "The time to sign has become a burden on my work",
+        "Get tired when signing",
+        "Very troublesome because it is a sign of many"
+      ],
+      "aboutTitle": "About e-Tax Invoice & e-Receipt and Digital Signature",
+      "aboutDesc": "In Japan System We support the introduction of e-Tax invoice & e-Receipt and digital signatures, one of the nine DX measures promoted by the Thai Revenue Service.",
+      "definitionEtaxTitle": "What is e-Tax Invoice & e-Receipt?",
+      "definitionEtaxDesc": "Refers to the use of tax invoices, electronic receipts, and digital signatures. Automatic date and time stamp.",
+      "definitionSigTitle": "What is a digital signature?",
+      "definitionSigDesc": "Digital signature and electronic signatures it is the information attached to the Invoice & Tax Invoice document sent to show the identity of the sender of the document. Not just placing a picture signature on the tax invoice but it also uses digital technology to prevent unauthorized use, signatures that enhance security and convenience with data encryption technology, including time stamps, etc.",
+      "benefitsTitle": "Benefits of introducing e-Tax Invoice & e-Receipt and digital signatures",
+      "benefits": [
+        "Saving tax invoices on your own server or cloud server allows you to secure storage and without the risk of document loss.",
+        "Copies of certifications are stored on the IRS server. (Tax office)",
+        "There is no need to go to the office and sign.",
+        "Eliminate the risk of misuse of signatures by clarifying who signed when and being able to verify them clearly."
+      ],
+      "mechanismTitle": "e-Tax Invoice & e-Receipt and Digital Signature Mechanism",
+      "introTitle": "For the introduction of e-Tax Invoice & e-Receipt and digital signatures,",
+      "introDesc": "In addition to the application process for various services It is also necessary to introduce (and build) a system that meets the requirements of the Thai Revenue Office, Japan System, operates everything from the application process to the introduction and processing of tax invoices, electronic receipts, and also digital signatures on electronic documents.",
+      "costTitle": "Cost reduction example by introducing e-Tax Invoice & e-Receipt",
+      "costSubtitle": "Tax Invoice (Paper medium)",
+      "costItems": [
+        { "label": "Use paper", "price": "0.8 Baht/set" },
+        { "label": "Printing fee", "price": "2 Baht/set" },
+        { "label": "Storage material", "price": "0.02 Baht/set" },
+        { "label": "Delivery fee (EMS)", "price": "37 Baht/set" }
+      ],
+      "costTotal": "Total",
+      "costTotalValue": "39.82 Baht",
+      "costMonthlyLabel": "Monthly cost when the circulation is 1,000 copies / month",
+      "costMonthlyValue": "39.82 Baht × 1,000 = 39,820 Baht / month",
+      "costMonthlyReduction": "Monthly 39,820 baht + labor cost reduction!",
+      "contactBtn": "Contact"
+    },
+    "marketing": {
+      "metaTitle": "DX & IT Marketing",
+      "title": "Marketing",
+      "heroTitle": "Website and Online Marketing",
+      "cardWebsite": "Website",
+      "cardOnlineMarketing": "Online Marketing"
+    },
+    "myLogStar": {
+      "metaTitle": "My Log Star Detail",
+      "title": "My Log Star",
+      "heroTitle": "My log star",
+      "heroDesc": "What is log management? When you use a personal computer, information such as what software you used and which file you opened is recorded on your computer... (logs) contains a great deal of information, and a closer look reveals who, when, and what they were doing on their computer.",
+      "featureTitle": "MylogStar Features",
+      "featureLogCollectionTitle": "Log collection power",
+      "featureLogCollectionDesc": "Acquires logs at the kernel level of the OS, grasping operations that cannot be acquired by other log management products.",
+      "featureLogAvailabilityTitle": "Log availability",
+      "featureLogAvailabilityDesc": "Highly accurate logs for information leakage countermeasures and business improvement."
+    },
+    "company": {
+      "metaTitle": "Company Profile",
+      "title": "Company Profile",
+      "subtitle": "A calm, precise presence in Thailand—delivering Japanese-quality execution with local expertise.",
+      "about": {
+        "title": "About Our Company",
+        "body": "Japan System (Thailand) Co., Ltd. provides high-quality IT solutions, leveraging Japanese precision with local expertise.",
+        "imageAlt": "Minimal office building"
+      },
+      "infoTitle": "Corporate Information",
+      "info": [
+        { "k": "Company Name", "v": "Japan System Co., Ltd. & Japan System (Thailand) Co., Ltd." },
+        { "k": "Address", "v": "28th Fl., 253 Asoke Building, Sukhumvit 21 Rd., Khlong Toei Nuea, Watthana, Bangkok 10110." },
+        { "k": "Establishment", "v": "2015/12" },
+        { "k": "Capital", "v": "2,000,000 THB" },
+        { "k": "Representative", "v": "Tsubasa Hoshino" },
+        { "k": "Email", "v": "info@jpsys-th.com" },
+        { "k": "Phone", "v": "02-664-1674" }
+      ]
+    },
+    "contact": {
+      "metaTitle": "Contact",
+      "title": "Contact Us",
+      "subtitle": "If you have any questions or inquiries, please feel free to contact us.",
+      "form": {
+        "title": "Send us a message",
+        "companyName": "Company Name",
+        "name": "Name",
+        "email": "Email",
+        "subject": "Subject",
+        "message": "Message",
+        "note": "We'll respond within 1–2 business days."
+      },
+      "office": {
+        "title": "Office",
+        "email": "info@jpsys-th.com",
+        "phone": "02-664-1674"
+      }
+    },
+    "blog": {
+      "metaTitle": "Blog & News",
+      "title": "Blog & News",
+      "subtitle": "News, articles and updates from Japan System Thailand",
+      "featured": "Featured",
+      "readMore": "Read article",
+      "backToBlog": "Back to Blog",
+      "allPosts": "All posts",
+      "noPosts": "No posts yet",
+      "latestUpdates": "Latest updates",
+      "contactUs": "Contact us"
+    }
+  },
+  "footer": {
+    "companyProfile": "Company Profile",
+    "contact": "Contact"
+  }
+}

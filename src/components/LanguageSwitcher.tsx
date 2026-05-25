@@ -1,20 +1,31 @@
 "use client";
 
-import { languages } from "@/i18n/translations";
-import { useLanguage } from "@/i18n/LanguageContext";
+import { usePathname, useRouter } from "next/navigation";
+import { locales, localeLabels } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 
-export function LanguageSwitcher() {
-  const { lang, setLang } = useLanguage();
+export function LanguageSwitcher({ currentLang }: { currentLang: Locale }) {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLanguageChange = (newLocale: Locale) => {
+    if (newLocale === currentLang) return;
+    
+    // Replace the first segment of the path with the new locale
+    const newPath = pathname.replace(`/${currentLang}`, `/${newLocale}`);
+    router.push(newPath);
+    router.refresh(); // Optional, to ensure data is refetched if needed
+  };
 
   return (
     <div className="flex items-center gap-0.5 sm:gap-1 rounded-full border border-slate-200 bg-white/60 p-0.5 sm:p-1 backdrop-blur">
-      {languages.map((l) => {
-        const active = l.code === lang;
+      {locales.map((locale) => {
+        const active = locale === currentLang;
         return (
           <button
-            key={l.code}
+            key={locale}
             type="button"
-            onClick={() => setLang(l.code)}
+            onClick={() => handleLanguageChange(locale)}
             className={
               "rounded-full px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-xs font-semibold tracking-wide transition-colors " +
               (active
@@ -23,7 +34,7 @@ export function LanguageSwitcher() {
             }
             aria-pressed={active}
           >
-            {l.label}
+            {localeLabels[locale]}
           </button>
         );
       })}

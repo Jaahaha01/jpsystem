@@ -23,9 +23,36 @@ const nextConfig: NextConfig = {
       { protocol: "http", hostname: "localhost" },
       { protocol: "http", hostname: "127.0.0.1" },
       { protocol: "https", hostname: "*.media.strapiapp.com" },
+      { protocol: "https", hostname: "*.strapiapp.com" },
     ],
     // Allow Next.js to fetch from localhost (avoids upstream image resolved to private ip)
-    dangerouslyAllowSVG: true,
+    dangerouslyAllowSVG: false,
+  },
+
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
+          },
+        ],
+      },
+    ];
   },
 
   // Enable gzip/brotli compression headers

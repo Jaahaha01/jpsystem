@@ -1,0 +1,192 @@
+{
+  "brand": "Japan System Thailand",
+  "nav": {
+    "home": "ホーム",
+    "solution": "ソリューション",
+    "newRelease": "新製品",
+    "itSystem": "ITシステム",
+    "eTax": "e-Tax Invoice & e-Receipt",
+    "marketing": "マーケティング",
+    "myLogStar": "My Log Star",
+    "blog": "ブログ",
+    "company": "会社概要",
+    "contact": "お問い合わせ"
+  },
+  "common": {
+    "readMore": "詳細を見る",
+    "learnMore": "もっと見る",
+    "send": "送信",
+    "sent": "送信済み",
+    "copyright": "Copyright Japan System Co., Ltd. & Japan System (Thailand) Co., Ltd. All rights Reserved.",
+    "email": "メール",
+    "phone": "電話",
+    "address": "住所",
+    "addressValue": "28th Fl., 253 Asoke Building, Sukhumvit 21 Rd., Khlong Toei Nuea, Watthana, Bangkok 10110."
+  },
+  "pages": {
+    "home": {
+      "metaTitle": "モダン禅 IT パートナー",
+      "hero": {
+        "title": "Japan System では貴社の DX（デジタルトランスフォーメーション）をお手伝いいたします。",
+        "subtitle": "ミニマルで精緻。システム開発、e-Tax、DX/ITマーケティングを一貫して提供します。",
+        "ctaPrimary": "サービスを見る"
+      },
+      "services": {
+        "title": "サービス",
+        "items": [
+          { "title": "ITシステム開発", "desc": "設計から品質を担保し、拡張性と保守性を重視した実装を行います。" },
+          { "title": "e-Tax Invoice & e-Receipt", "desc": "業務を電子化し、コスト削減とスピード向上を実現します。" },
+          { "title": "DX / ITマーケティング", "desc": "分析から運用まで—戦略と実行をテクノロジーでつなぎます。" },
+          { "title": "セキュリティ / ログ", "desc": "監査ログと可観測性の整備で、ガバナンスと運用を強化します。" },
+          { "title": "コンサルティング", "desc": "経営層にも伝わるロードマップで意思決定を支援します。" }
+        ]
+      }
+    },
+    "newRelease": {
+      "metaTitle": "新製品",
+      "title": "新発売",
+      "subtitle": "洗練されたプロダクト情報を、静かな余白で。",
+      "eTaxHeading": "税務請求書の利用について",
+      "taxInvoiceSubtitle": "税務請求書（紙媒体）",
+      "costTable": {
+        "option": "項目",
+        "value": "値",
+        "usePaper": "用紙代",
+        "usePaperVal": "0.8 Baht/セット",
+        "printingFee": "印刷費",
+        "printingFeeVal": "2 Baht/セット",
+        "storageMaterial": "保管資材",
+        "storageMaterialVal": "0.02 Baht/セット",
+        "deliveryFee": "配送料 (EMS)",
+        "deliveryFeeVal": "37 Baht/セット",
+        "total": "合計",
+        "totalVal": "39.82 Baht"
+      },
+      "monthlyCostLabel": "月間発行数 1,000 部の場合の月額コスト",
+      "monthlyCostValue": "39.82 Baht x 1,000 = 39,820 Baht / 月",
+      "monthlyCostReduction": "月額 39,820 Baht + 人件費削減！"
+    },
+    "itSystem": {
+      "metaTitle": "ITシステム",
+      "title": "ITシステム",
+      "subtitle": "薄い線と円形アイコンで、機能を端正に見せる。",
+      "productsTitle": "製品 / サービス",
+      "serviceItems": [
+        { "title": "メンテナンス" },
+        { "title": "ウェブサイト & オンラインマーケティング" },
+        { "title": "ITサポート & ヘルプデスク" },
+        { "title": "商品管理システム" }
+      ],
+      "features": [
+        { "title": "Web Application", "desc": "企業向けのスケーラブルな開発。" },
+        { "title": "Mobile & Tablet", "desc": "端末を問わない高品質UX。" },
+        { "title": "Integration", "desc": "API/ERP/業務連携を自然に。" },
+        { "title": "Cloud & DevOps", "desc": "CI/CDと基盤で信頼性を担保。" }
+      ]
+    },
+    "eTax": {
+      "metaTitle": "e-Tax Invoice & e-Receipt",
+      "title": "e-Tax Invoice & e-Receipt",
+      "painHeading": "さまざまな書類への手書き署名に時間を浪費していませんか？",
+      "painTitle": "よくある課題",
+      "painItems": [
+        "署名する書類が多すぎる",
+        "1枚のために出社しなければならないことがある",
+        "署名の時間が業務負担になっている",
+        "署名作業に疲れてしまう",
+        "大量に署名が必要でとても面倒"
+      ],
+      "aboutTitle": "e-Tax Invoice & e-Receipt とデジタル署名について",
+      "aboutDesc": "Japan Systemでは、タイ歳入局が推進する9つのDX施策の一つである e-Tax Invoice & e-Receipt とデジタル署名の導入を支援しています。",
+      "definitionEtaxTitle": "e-Tax Invoice & e-Receipt とは？",
+      "definitionEtaxDesc": "電子請求書、電子領収書、デジタル署名の利用を指します。日付と時刻の自動スタンプ付き。",
+      "definitionSigTitle": "デジタル署名とは？",
+      "definitionSigDesc": "デジタル署名と電子署名は、Invoice・税務請求書に添付される情報で、送信者の身元を証明するものです。税務請求書に署名画像を貼るだけでなく、不正使用を防ぐためのデジタル技術を活用し、データ暗号化技術やタイムスタンプなどによりセキュリティと利便性を向上させる署名です。",
+      "benefitsTitle": "e-Tax Invoice & e-Receipt とデジタル署名の導入メリット",
+      "benefits": [
+        "自社サーバーまたはクラウドサーバーに税務請求書を保存でき、書類紛失のリスクなく安全に保管できます。",
+        "認証のコピーは歳入局サーバーに保管されます。（税務署）",
+        "オフィスに行って署名する必要がありません。",
+        "いつ誰が署名したかを明確にし、署名の悪用リスクを排除し、明確に検証できます。"
+      ],
+      "mechanismTitle": "e-Tax Invoice & e-Receipt とデジタル署名の仕組み",
+      "introTitle": "e-Tax Invoice & e-Receipt とデジタル署名の導入にあたって",
+      "introDesc": "各種サービスの申請手続きに加えて、タイ歳入局の要件を満たすシステムの導入（構築）も必要です。Japan Systemは、申請手続きから税務請求書・電子領収書の導入・処理、さらに電子文書へのデジタル署名まで、すべてを一貫して対応します。",
+      "costTitle": "e-Tax Invoice & e-Receipt 導入によるコスト削減例",
+      "costSubtitle": "税務請求書（紙媒体）",
+      "costItems": [
+        { "label": "用紙代", "price": "0.8 Baht/セット" },
+        { "label": "印刷費", "price": "2 Baht/セット" },
+        { "label": "保管資材", "price": "0.02 Baht/セット" },
+        { "label": "配送料 (EMS)", "price": "37 Baht/セット" }
+      ],
+      "costTotal": "合計",
+      "costTotalValue": "39.82 Baht",
+      "costMonthlyLabel": "月間発行数 1,000 部の場合の月額コスト",
+      "costMonthlyValue": "39.82 Baht × 1,000 = 39,820 Baht / 月",
+      "costMonthlyReduction": "月額 39,820 Baht + 人件費削減！",
+      "contactBtn": "お問い合わせ"
+    },
+    "marketing": {
+      "metaTitle": "DX / ITマーケティング",
+      "title": "マーケティング",
+      "heroTitle": "ウェブサイトとオンラインマーケティング",
+      "cardWebsite": "ウェブサイト",
+      "cardOnlineMarketing": "オンラインマーケティング"
+    },
+    "myLogStar": {
+      "metaTitle": "My Log Star 詳細",
+      "title": "My Log Star",
+      "heroTitle": "My log star",
+      "heroDesc": "ログ管理とは？パソコンを使用すると、使用したソフトウェアや開いたファイルなどの情報がコンピュータに記録されます...（ログ）には多くの情報が含まれており、詳しく調べると誰がいつ何をしていたかがわかります。",
+      "featureTitle": "MylogStarの特長",
+      "featureLogCollectionTitle": "ログ収集力",
+      "featureLogCollectionDesc": "OSのカーネルレベルでログを取得し、他のログ管理製品では取得できない操作を把握します。",
+      "featureLogAvailabilityTitle": "ログの活用性",
+      "featureLogAvailabilityDesc": "情報漏えい対策や業務改善に活用できる高精度なログ。"
+    },
+    "company": {
+      "metaTitle": "会社概要",
+      "title": "会社概要",
+      "subtitle": "タイでのビジョンを静かな余白で—日本品質の精度とローカルの知見を融合します。",
+      "about": {
+        "title": "私たちについて",
+        "body": "Japan System (Thailand) Co., Ltd. は、日本品質の精度とローカルの知見を融合し、高品質なITソリューションを提供しています。",
+        "imageAlt": "ミニマルなオフィスビル"
+      },
+      "infoTitle": "会社情報",
+      "info": [
+        { "k": "会社名", "v": "Japan System Co., Ltd. & Japan System (Thailand) Co., Ltd." },
+        { "k": "住所", "v": "28th Fl., 253 Asoke Building, Sukhumvit 21 Rd., Khlong Toei Nuea, Watthana, Bangkok 10110." },
+        { "k": "設立", "v": "2015/12" },
+        { "k": "資本金", "v": "2,000,000 THB" },
+        { "k": "代表者", "v": "Tsubasa Hoshino" },
+        { "k": "Email", "v": "info@jpsys-th.com" },
+        { "k": "電話", "v": "02-664-1674" }
+      ]
+    },
+    "contact": {
+      "metaTitle": "お問い合わせ",
+      "title": "お問い合わせ",
+      "subtitle": "ご質問やお問い合わせがございましたら、お気軽にお問い合わせください。",
+      "form": {
+        "title": "メッセージを送る",
+        "companyName": "会社名",
+        "name": "お名前",
+        "email": "メール",
+        "subject": "件名",
+        "message": "内容",
+        "note": "1〜2営業日以内にご連絡します。"
+      },
+      "office": {
+        "title": "オフィス",
+        "email": "info@jpsys-th.com",
+        "phone": "02-664-1674"
+      }
+    }
+  },
+  "footer": {
+    "companyProfile": "会社概要",
+    "contact": "お問い合わせ"
+  }
+}

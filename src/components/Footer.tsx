@@ -1,13 +1,9 @@
-"use client";
-
 import Link from "next/link";
 import { SiteImage as Image } from "@/components/SiteImage";
 import { Container } from "@/components/Container";
-import { useLanguage } from "@/i18n/LanguageContext";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-export function Footer() {
-  const { t } = useLanguage();
-
+export function Footer({ dict, lang }: { dict: Dictionary; lang: string }) {
   return (
     <footer className="relative border-t border-slate-200/60 bg-gradient-to-b from-white to-slate-50 overflow-hidden">
       {/* Decorative top gradient line */}
@@ -31,7 +27,7 @@ export function Footer() {
                 className="rounded-full opacity-60"
               />
               <div className="text-xs font-medium text-slate-500">
-                {t.common.copyright}
+                {dict.common.copyright}
               </div>
             </div>
 
@@ -39,21 +35,21 @@ export function Footer() {
             <div className="flex flex-wrap items-center gap-4 sm:gap-5 text-xs font-semibold text-slate-600">
               <Link
                 className="transition-colors hover:text-slate-900 hover:underline underline-offset-4"
-                href="/company-profile"
+                href={`/${lang}/company-profile`}
               >
-                {t.footer.companyProfile}
+                {dict.footer.companyProfile}
               </Link>
               <div className="h-3 w-px bg-slate-200 hidden sm:block" />
               <Link
                 className="transition-colors hover:text-slate-900 hover:underline underline-offset-4"
-                href="/contact"
+                href={`/${lang}/contact`}
               >
-                {t.footer.contact}
+                {dict.footer.contact}
               </Link>
               <div className="h-3 w-px bg-slate-200 hidden sm:block" />
               <Link
                 className="transition-colors hover:text-slate-900 hover:underline underline-offset-4"
-                href="/e-tax"
+                href={`/${lang}/e-tax`}
               >
                 E-Tax
               </Link>
