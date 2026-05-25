@@ -1,7 +1,7 @@
 /**
  * Strapi CMS API client
  * Fetches blog posts from Strapi v4/v5 REST API
- * Deployed Strapi URL: https://sublime-ducks-443367ee0e.strapiapp.com/
+ * Deployed Strapi URL: https://committed-activity-2b489cb880.strapiapp.com/
  *
  * Set STRAPI_URL in .env.local or your hosting environment to override.
  * NOTE: Use STRAPI_URL (not NEXT_PUBLIC_STRAPI_URL) for server-side only fetching
@@ -11,7 +11,7 @@
 import { cache } from "react";
 
 const STRAPI_URL =
-  process.env.STRAPI_URL || "https://sublime-ducks-443367ee0e.strapiapp.com";
+  process.env.STRAPI_URL || "https://committed-activity-2b489cb880.strapiapp.com";
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN || "";
 
 import type { StrapiImage, StrapiImageFormat, StrapiCategory, BlogPost, HomepageData, NewsCard, NewReleaseData, CompanyData, ContactData, ItServiceItem, ItFeatureItem, ItSystemData, ETaxPainItem, ETaxBenefitItem, ETaxCostItem, ETaxData, MarketingSocialIcon, MarketingData, MyLogStarAccordionItem, MyLogStarData } from '@/types/strapi';
