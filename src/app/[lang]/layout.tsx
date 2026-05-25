@@ -47,17 +47,13 @@ export default async function RootLayout(props: {
   const locale = hasLocale(lang) ? lang : defaultLocale;
   const dict = await getDictionary(locale);
 
-  // Remove server-side cookies check to allow Next.js to statically generate the entire site.
-  // The client component (ShellWrapper) will check the cookie in a useEffect.
-  const initialShowLoader = true;
-
   return (
     <html
       lang={htmlLangMap[locale]}
       className={`${inter.variable} ${notoSansJP.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-slate-900 selection:bg-sky-100 selection:text-slate-900">
-        <ShellWrapper dict={dict} lang={locale} initialShowLoader={initialShowLoader}>
+        <ShellWrapper dict={dict} lang={locale}>
           {props.children}
         </ShellWrapper>
       </body>
