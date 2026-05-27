@@ -109,7 +109,9 @@ export default function MyLogStarClient({ data, dict }: { data: MyLogStarData | 
   const featureLogAvailabilityDesc = data?.featureLogAvailabilityDesc || p.featureLogAvailabilityDesc;
 
   // 4. Accordion merging
-  const defaultAccordion = [
+  const dictAccordion = (p as any).accordion as Array<{ id: string; title: string; content: string }> | undefined;
+
+  const defaultAccordion = dictAccordion ?? [
     {
       id: "log-management",
       title: "What is log management?",
@@ -131,6 +133,7 @@ export default function MyLogStarClient({ data, dict }: { data: MyLogStarData | 
       content: "My log Star Desktop — \"Log management\" & \"device control\" that can be done immediately on a stand-alone PC or a small base\nMylogStar Desktop is log management and device control software that is ideal for environments with a small number of target PCs, such as PCs that cannot connect to the network and small bases. No management server is required, and it can be easily installed by simply installing it on the target PC. With the industry's top class log collection power, operation logs in the target PC can be uprooted and managed as a trail. In addition, the device control function controls the export of confidential data.\n\nLog management\nMylogStar Desktop — With the industry's top class log collection power, you can uproot the operation log in the target PC and keep it as a trail. The most worrisome thing about leaks from standalone PCs and mobile PCs is the removable disk. MylogStar Desktop records all file operations performed on local disks, network drives, etc., including removable disks. In addition, it also has a trace function, so even if a cover-up is performed by unauthorized operation, it can be identified immediately. With the screen snapshot function, you can also capture the screen when a specified event occurs.\n\nMylogStar 4 Standalone Manager\nMylogStar 4 Standalone Manager is MylogStar 4 — Logs of several machines on which Desktop is installed can be centrally collected, managed and viewed. In addition, MylogStar 4 Standalone including alert function and report function. There are also functions and operations that can be enhanced by using Manager.\n\n※ SQL Server is required to use Standalone Manager.\n※ The English version of MylogStar 4 Standalone Manager is a product to be developed, so we will let you know when it will be available.\n\nEasy-to-understand and simple management console\nThe management console of MylogStar Desktop is a simple and easy-to-understand management console so that even personnel who are not familiar with IT can easily check the logs.\n\nDevice control\nMylogStar Desktop's Access Control Option not only prohibits the use of USB devices uniformly, but also allows you to set detailed security policies such as allow, prohibit, and read-only when using USB storage. In addition, by using the \"USB whitelist\" function, it is possible to give permission to use only a specific USB storage based on the vendor ID, product ID, and serial number given to the USB storage. As a result, it is possible to enhance security by taking advantage of the convenience of USB storage without impairing business efficiency."
     }
   ];
+  
   
   const accordion = defaultAccordion.map((defaultSec, idx) => {
     const strapiSec = data?.accordionItems?.[idx];

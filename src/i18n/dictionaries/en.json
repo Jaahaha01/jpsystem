@@ -143,7 +143,29 @@
       "featureLogCollectionTitle": "Log collection power",
       "featureLogCollectionDesc": "Acquires logs at the kernel level of the OS, grasping operations that cannot be acquired by other log management products.",
       "featureLogAvailabilityTitle": "Log availability",
-      "featureLogAvailabilityDesc": "Highly accurate logs for information leakage countermeasures and business improvement."
+      "featureLogAvailabilityDesc": "Highly accurate logs for information leakage countermeasures and business improvement.",
+      "accordion": [
+        {
+          "id": "log-management",
+          "title": "What is log management?",
+          "content": "When you use a personal computer, information such as what software you used and which file you opened is recorded on your computer. Also, when you visit a website using the Internet, you can keep a record of which page you visited on what day of the month. In addition, special systems can be used to collect more detailed information. The personal computer usage history collected in this way is called a \"log\". The log contains a great deal of information, and a closer look reveals who, when, and what they were doing on their computer."
+        },
+        {
+          "id": "log-collection",
+          "title": "Log collection power",
+          "content": "When managing logs, if the necessary logs cannot be collected, they cannot be saved or analyzed as a trail. MylogStar acquires logs at the kernel level of the OS, and can grasp operations that cannot be acquired by other log management products. Since highly accurate logs can be acquired, it can be effectively used for information leakage countermeasures and business improvement. When you use a personal computer, information such as what software you used and which file you opened is recorded on your computer. Also, when you visit a website using the Internet, you can keep a record of which page you visited on what day of the month. In addition, special systems can be used to collect more detailed information. The personal computer usage history collected in this way is called a \"log\". The log contains a great deal of information, and a closer look reveals who, when, and what they were doing on their computer.\n\nLog collection power\nI don't know when to use the collected logs. If you suspect an information leak, you may want to check the logs over the last few years. This log is meaningless unless it is available. MylogStar is a dedicated software for managing client operation logs, and provides user-friendly operation management that makes use of many years of experience.\n\nLog management to Support telework\nFrom security measures to business improvement with MylogStar"
+        },
+        {
+          "id": "fileserver",
+          "title": "My log Star FileServer",
+          "content": "Pinpoint monitoring of important servers Low price & high functionality! File server access log / audit log management\n\nLog monitoring is indispensable for measures against information leakage. However, for companies that own a huge number of servers or small and medium-sized companies that cannot devote a lot of resources to system management, it will be difficult to implement it on all systems. MylogStar FileServer monitors data input / output and user operations within the file server by narrowing down the monitoring target to the file server where confidential information is stored and installing it directly on the monitored server. It is a file server access log management software that maintains security. MylogStar FileServer also makes it possible to acquire audit logs. Audit logs are a record of operations performed by system administrators and users. The operation contents in the server are recorded as an audit log in chronological order and continuously (when, who, what did). There is no need to prepare a separate management server, and there is no need to install an agent on the PC, so log management is easy and inexpensive."
+        },
+        {
+          "id": "desktop",
+          "title": "My log star Desktop",
+          "content": "My log Star Desktop — \"Log management\" & \"device control\" that can be done immediately on a stand-alone PC or a small base\nMylogStar Desktop is log management and device control software that is ideal for environments with a small number of target PCs, such as PCs that cannot connect to the network and small bases. No management server is required, and it can be easily installed by simply installing it on the target PC. With the industry's top class log collection power, operation logs in the target PC can be uprooted and managed as a trail. In addition, the device control function controls the export of confidential data.\n\nLog management\nMylogStar Desktop — With the industry's top class log collection power, you can uproot the operation log in the target PC and keep it as a trail. The most worrisome thing about leaks from standalone PCs and mobile PCs is the removable disk. MylogStar Desktop records all file operations performed on local disks, network drives, etc., including removable disks. In addition, it also has a trace function, so even if a cover-up is performed by unauthorized operation, it can be identified immediately. With the screen snapshot function, you can also capture the screen when a specified event occurs.\n\nDevice control\nMylogStar Desktop's Access Control Option not only prohibits the use of USB devices uniformly, but also allows you to set detailed security policies such as allow, prohibit, and read-only when using USB storage."
+        }
+      ]
     },
     "company": {
       "metaTitle": "Company Profile",
